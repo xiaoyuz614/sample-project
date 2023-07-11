@@ -12,9 +12,6 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     @Query("SELECT p FROM Product  p WHERE p.category = :category")
     List<Product> findProductByCategory(@Param("category") String category);
 
-    @Query("SELECT p FROM Product  p WHERE p.price > :number")
-    List<Product> findProductWithPriceGreaterThan(@Param("number") double number);
-
-
-
+    @Query("SELECT p FROM Product  p WHERE p.price > :lower and p.price < :upper")
+    List<Product> findProductsWithinRange(@Param("lower") double lower, @Param("upper") double upper);
 }
